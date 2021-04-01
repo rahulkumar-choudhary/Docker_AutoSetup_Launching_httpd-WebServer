@@ -11,7 +11,7 @@ In addition, the roles specifically target the `RedHat OS` family, including `Ce
 ## Description
 Contains two roles:
 * `docker-setup` : Configure docker environment in target node(s).
-* `httpd-server-docker` : Configure httpd webserver.
+* `httpd-server-docker` : Configure httpd webserver inside httpd-centos container.
 
 ## Prerequisite
 Require Ansible version 2.10.3 installed.
