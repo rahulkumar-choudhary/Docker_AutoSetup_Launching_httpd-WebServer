@@ -1,2 +1,5 @@
 ---
 # vars file for docker-setup
+ports: 
+  - 80
+  - 443
