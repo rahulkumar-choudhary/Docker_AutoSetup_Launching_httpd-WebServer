@@ -8,11 +8,25 @@
         baseurl: https://download.docker.com/linux/centos/7/x86_64/stable/
         gpgcheck: no
 
-- name: Installing Docker
-  shell: "yum install docker-ce --nobest -y"
+- name: Installing Docker only if not present
+- shell: rpm -q docker-ce; if [ $? != 0 ]; then yum install docker-ce --nobest -y; fi       
 
 - name: Starting Docker Services
   service:
         name: docker
         state: started
-        enabled: yes        
+        enabled: yes 
+
+- name: permit traffic
+  ansible.posix.firewalld:
+    port: "{{ item }}/tcp"
+    permanent: yes
+    state: enabled
+  loop: "{{ ports }}"  
+
+- name: masquerade setting
+  ansible.posix.firewalld:
+    zone: public
+    masquerade: enable
+    permanent: yes
+    state: enabled
