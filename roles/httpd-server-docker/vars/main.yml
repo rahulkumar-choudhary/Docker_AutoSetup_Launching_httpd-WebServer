@@ -1,0 +1,13 @@
+---
+# vars file for httpd-server-docker
+
+img_version: "v4"
+
+mount_volume_dir: "/doc-vol"
+
+port_for_httpd_svc: "3898"    
+
+Docker_Host_ip_addr: 
+    - "{{ inventory_hostname }}"
+
+

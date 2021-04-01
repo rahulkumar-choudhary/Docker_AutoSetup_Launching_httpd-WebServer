@@ -1,0 +1,48 @@
+---
+# tasks file for httpd-server-docker
+
+- name: installing prerequisite
+  pip:
+    name: docker-py
+
+- name: httpd Image pull
+  docker_image:
+    name: "rahul079/httpd-centos:{{ img_version }}"
+    source: pull
+    tag: "{{ img_version }}"
+
+- name: making volume directory in target node
+  file:
+    path: "{{ mount_volume_dir }}"
+    state: directory
+    force: true
+
+- name: test page copy to target node host dir
+  template:
+    src: index.html.j2
+    dest: "{{ mount_volume_dir }}/index.html"    
+
+- name: Starting httpd docker container
+  docker_container:
+    name: my_app
+    image: "rahul079/httpd-centos:{{ img_version }}"
+    state: started
+    ports:
+         - "{{ port_for_httpd_svc }}:80"
+    volumes:
+         - "{{ mount_volume_dir }}:/var/www/html/"
+
+- name: Allowing port (Fiewalld)
+  ansible.posix.firewalld:
+    port: "{{ port_for_httpd_svc }}/tcp"
+    permanent: yes
+    state: enabled
+
+- name: URL   
+  debug:
+          msg: "http://{{ item }}:{{ port_for_httpd_svc }}"
+  loop: "{{ Docker_Host_ip_addr }}"   
+
+
+
+

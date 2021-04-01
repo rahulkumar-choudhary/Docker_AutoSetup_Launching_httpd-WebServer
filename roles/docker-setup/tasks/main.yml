@@ -1,0 +1,18 @@
+---
+# tasks file for docker-setup
+
+- name: Configuring yum for instalation of Docker
+  yum_repository:
+        name: Docker123
+        description: Docker yum repo
+        baseurl: https://download.docker.com/linux/centos/7/x86_64/stable/
+        gpgcheck: no
+
+- name: Installing Docker
+  shell: "yum install docker-ce --nobest -y"
+
+- name: Starting Docker Services
+  service:
+        name: docker
+        state: started
+        enabled: yes        

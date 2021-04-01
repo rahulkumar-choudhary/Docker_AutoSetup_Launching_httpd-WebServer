@@ -1,0 +1,9 @@
+---
+
+- hosts: docker_host
+  roles: 
+    - name: Docker Setup
+      role: docker-setup
+      
+    - name: httpd Server
+      role: httpd-server-docker
