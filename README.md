@@ -31,7 +31,3 @@ port_for_httpd_svc: "3898"
 ```bash
 ansible-playbook setup.yml
 ```
-### Connect me
-* [Linkedin](https://linkedin.com/in/rahulkumar-choudhary "Rahulkumar Choudhary")
-* [Twitter](https://twitter.com/Rahulkumar29420 "Rahulkumar29420")
-* [Medium](https://rahulchoudhary5768.medium.com/ "Rahulkumar Choudhary")
